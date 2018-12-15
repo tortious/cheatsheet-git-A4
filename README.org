@@ -9,7 +9,7 @@
 <div id="the whole thing" style="overflow: hidden;">
 <div style="float: left; padding: 5px"> <a href="https://www.linkedin.com/in/dennyzhang001"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a></div>
 <div style="float: left; padding: 5px"><a href="https://github.com/dennyzhang"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a></div>
-<div style="float: left; padding: 5px"><a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img src="https://slack.dennyzhang.com/badge.svg" alt="slack"/></a></div>
+<div style="float: left; padding: 5px"><a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/slack.png" alt="slack"/></a></div>
 </div>
 
 <br/><br/>
@@ -22,27 +22,30 @@
 
 File me [[https://github.com/DennyZhang/cheatsheet-git-A4/issues][Issues]] or star [[https://github.com/DennyZhang/cheatsheet-git-A4][this repo]].
 ** Git Advanced
-| Name                                | Comment                                                                          |
-|-------------------------------------+----------------------------------------------------------------------------------|
-| Git squash to make history clean    | =git rebase -i HEAD~4=; =git push origin <branch-name> --force= [[https://github.com/todotxt/todo.txt-android/wiki/Squash-All-Commits-Related-to-a-Single-Issue-into-a-Single-Commit][link]]             |
-| Find git branch by commit hash      | =git name-rev ${commit_hash}=, or https://${git_repo_link}/commit/${commit_hash} |
-| List all remote git branches        | =git ls-remote --heads origin=                                                   |
-| Git clone repo with another ssh key | ssh-agent bash -c 'ssh-add yourkey; git clone git@github.com:user/project.git'   |
+| Name                                | Comment                                                                        |
+|-------------------------------------+--------------------------------------------------------------------------------|
+| [[https://github.com/todotxt/todo.txt-android/wiki/Squash-All-Commits-Related-to-a-Single-Issue-into-a-Single-Commit][Git squash to make history clean]]    | =git rebase -i HEAD~4=; =git push origin <branch-name> --force=                |
+| Find git branch by commit hash      | https://${git_repo_link}/commit/${commit_hash}, =git name-rev ${commit_hash}=  |
+| List all remote git branches        | =git ls-remote --heads origin=                                                 |
+| Git clone repo with another ssh key | ssh-agent bash -c 'ssh-add yourkey; git clone git@github.com:user/project.git' |
+| [[https://docs.gitlab.com/ee/user/project/code_owners.html][Code Owners]]                         | Define individuals or teams that are responsible for code in a repository.     |
 ** Git Commit
 | Name                             | Comment                                                                 |
 |----------------------------------+-------------------------------------------------------------------------|
-| Git squash to make history clean | =git rebase -i HEAD~4=; =git push origin <branch-name> --force= [[https://github.com/todotxt/todo.txt-android/wiki/Squash-All-Commits-Related-to-a-Single-Issue-into-a-Single-Commit][link]]    |
+| [[https://github.com/todotxt/todo.txt-android/wiki/Squash-All-Commits-Related-to-a-Single-Issue-into-a-Single-Commit][Git squash to make history clean]] | =git rebase -i HEAD~4=; =git push origin <branch-name> --force=         |
 | Git commit and squash            | =git commit --amend --no-edit=, =git push origin <branch-name> --force= |
 | Git add patch                    | =git add -p=                                                            |
 | Git commit                       | git commit -m 'XXX'                                                     |
 | Git add and commit               | git ci -m 'XXX'                                                         |
+
+[[https://cheatsheet.dennyzhang.com/cheatsheet-git-A4][https://raw.githubusercontent.com/dennyzhang/cheatsheet-git-A4/master/git-concept.png]]
 ** Git Undo
 | Name            | Comment                   |
 |-----------------+---------------------------|
 | Undo git commit | =git reset --hard HEAD~1= |
 | Undo git pull   | =git reset --hard=        |
-| Undo git merge  | =git merge --abort=       |
 | Undo git add    | =git reset filename.txt=  |
+| Undo git merge  | =git merge --abort=       |
 ** Git log
 | Name                                             | Comment                                                     |
 |--------------------------------------------------+-------------------------------------------------------------|
@@ -53,14 +56,29 @@ File me [[https://github.com/DennyZhang/cheatsheet-git-A4/issues][Issues]] or st
 | Name                                  | Comment                                                                     |
 |---------------------------------------+-----------------------------------------------------------------------------|
 | Compare git diff after commit         | =git diff --cached=                                                         |
+| Compare two git tags                  | =git diff ${sha1sum}..${sha2sum}=                                           |
 | Show changed file list                | =git diff --name-status=, =git diff --name-status --cached=                 |
 | Git diff two revision                 | =git diff ${sha1sum}..${sha2sum}=                                           |
 | Git show file changes                 | =git diff --name-only ${sha1sum} ${sha2sum}=                                |
-| Compare with previous version         | =git diff HEAD^ default.rb=                                                 |
+| Show changeset of the latest commit   | =git diff HEAD^=                                                            |
+| Show prvious changeset for one file   | =git diff HEAD^ default.rb=                                                 |
 | Compare two branches in CLI           | =git diff <branch_1>..<branch_2>= Make sure you have those branches locally |
 | Compare two revision in GitHub UI     | [[https://www.dennyzhang.com/github_wiki#sec-1-4][https://github.com/.../.../compare/sha1...sha2]]                              |
 | Compare latest 3 commits in GitHub UI | https://github.com/dennyzhang/cheatsheet-git-a4/compare/HEAD~3...HEAD       |
-| Configure default editor              | =export pager=cat=                                                          |
+#+BEGIN_HTML
+<a href="https://www.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/dns_small.png"></a>
+#+END_HTML
+** Git Config
+| Name                     | Comment                                                                                                             |
+|--------------------------+---------------------------------------------------------------------------------------------------------------------|
+| Show git config          | =git config --global/system=                                                                                        |
+| Configure default editor | =export pager=cat=, =git config --global core.editor nano=                                                          |
+| Edit git global config   | =git config --global --edit=                                                                                        |
+| Alias for git status     | =git config --global alias.st status= [[https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases][Link: git aliases]]                                                             |
+| Alias for git checkout   | =git config --global alias.co checkout=                                                                             |
+| Alias for git commit     | =git config --global alias.ci commit=                                                                               |
+| Reset git url            | =git config --global url."git@github.com:dennyzhang/myrepo.git:".insteadOf "https://github.com/dennyzhang/myrepo/"= |
+| Reference                | [[https://github.com/github/gitignore][GitHub: gitignore examples]]                                                                                          |
 ** Git Branch
 | Name                         | Comment                                  |
 |------------------------------+------------------------------------------|
@@ -74,39 +92,17 @@ File me [[https://github.com/DennyZhang/cheatsheet-git-A4/issues][Issues]] or st
 | Git Fetch all tags    | =git fetch --tags; git checkout tags/<tag_name>= |
 | Git delete local tag  | =git tag -d <tag_name>=                          |
 | Git delete remote tag | =git push --delete origin <tag_name>=            |
-** Git Config
-| Name                   | Comment                                                 |
-|------------------------+---------------------------------------------------------|
-| Show git config        | =git config --global/system=                            |
-| Edit git global config | =git config --global --edit=                            |
-| Alias for git status   | =git config --global alias.st status= [[https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases][Link: git aliases]] |
-| Alias for git checkout | =git config --global alias.co checkout=                 |
-| Alias for git commit   | =git config --global alias.ci commit=                   |
 ** Git Submodule
 | Name                           | Comment                            |
 |--------------------------------+------------------------------------|
 | Git add a repo to current repo | =git submodule add <git_repo_url>= |
 | Update submodule               | =git submodule update=             |
 ** GitHub
-| Name                           | Comment   |
-|--------------------------------+-----------|
-| Generate link for a code block | [[https://www.dennyzhang.com/github_wiki#sec-1-3][link]]      |
-| Git clone wiki                 | [[https://www.dennyzhang.com/github_wiki#sec-1-1][link]]      |
-| Generate TOC                   | [[https://www.dennyzhang.com/github_wiki#sec-1-2][gh-md-toc]] |
-| Github Shortcut                | [[https://help.github.com/articles/using-keyboard-shortcuts][link]]      |
-
-- GitHub/GitLab markdown image size
-#+BEGIN_EXAMPLE
-<img src="images/pks_logging_components.png" width="700x">
-
-![](/uploads/d19fcc3d3b4d313c8cd7960a343463b6/table.png)
-<img src="/uploads/d19fcc3d3b4d313c8cd7960a343463b6/table.png"  width="120" height="120">
-
-![](./pic/pic1_50.png =100x20)
-You can skip the HEIGHT
-
-![](./pic/pic1s.png =250x)
-#+END_EXAMPLE
+| Name            | Comment                                                       |
+|-----------------+---------------------------------------------------------------|
+| Github Shortcut | [[https://help.github.com/articles/using-keyboard-shortcuts][Link: Using keyboard shortcuts]]                                |
+| Generate TOC    | [[https://www.dennyzhang.com/github_wiki#sec-1-2][gh-md-toc]]                                                     |
+| Reference       | [[https://www.dennyzhang.com/github_wiki#sec-1-3][link: generate link for code block]], [[https://www.dennyzhang.com/github_wiki#sec-1-1][link: git clone wiki repo]] |
 ** More Resources
 https://github.com/git-tips/tips
 
@@ -118,7 +114,7 @@ License: Code is licensed under [[https://www.dennyzhang.com/wp-content/mit_lice
 
 <a href="https://www.linkedin.com/in/dennyzhang001"><img align="bottom" src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a>
 <a href="https://github.com/dennyzhang"><img align="bottom"src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a>
-<a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img align="bottom" src="https://slack.dennyzhang.com/badge.svg" alt="slack"/></a>
+<a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img align="bottom" src="https://www.dennyzhang.com/wp-content/uploads/sns/slack.png" alt="slack"/></a>
 #+END_HTML
 * org-mode configuration                                           :noexport:
 #+STARTUP: overview customtime noalign logdone showall
@@ -1512,7 +1508,6 @@ $ patch -p1 -i ../big.patch
 
 # Patch files in a directory, with one level (/) offset
 patch -p1 -r version1/ < version.patch
-* TODO git add alias for repo, and use two different ssh keys      :noexport:
 * TODO git remote repo                                             :noexport:
 - Configure two remote endpoint
 
@@ -2018,3 +2013,46 @@ https://help.github.com/categories/keyboard-shortcuts/
 * TODO How to undo a git pull?                                     :noexport:
 * TODO undo local git commit                                       :noexport:
 * TODO git undo: git add                                           :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* TODO git backport                                                :noexport:
+* TODO GitHub/GitLab markdown image size                           :noexport:
+#+BEGIN_EXAMPLE
+<img src="images/pks_logging_components.png" width="700x">
+
+![](/uploads/d19fcc3d3b4d313c8cd7960a343463b6/table.png)
+<img src="/uploads/d19fcc3d3b4d313c8cd7960a343463b6/table.png"  width="120" height="120">
+
+![](./pic/pic1_50.png =100x20)
+You can skip the HEIGHT
+
+![](./pic/pic1s.png =250x)
+#+END_EXAMPLE
+* TODO git get branch name from git commit hash                    :noexport:
+https://stackoverflow.com/questions/2706797/finding-what-branch-a-git-commit-came-from
+
+git branch --contains b1f5eb736a19e3be00c7c1a535f367b5fb8928bb
+b1f5eb736a19e3be00c7c1a535f367b5fb8928bb
+* TODO git find out which commit has deleted a file/folder         :noexport:
+* TODO git HTTPS ACCESS                                            :noexport:
+https://github.com/JeffDeCola/my-cheat-sheets/tree/master/software/development/source-version-control/git-cheat-sheet#https-access-using-netrc
+* TODO consolidate: https://github.com/JeffDeCola/my-cheat-sheets/tree/master/software/development/source-version-control/git-cheat-sheet#https-access-using-netrc :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* github add an image                                              :noexport:
+https://stackoverflow.com/questions/14494747/add-images-to-readme-md-on-github
+
+Try this markdown:
+
+![alt text](http://url/to/img.png)
+I think you can link directly to the raw version of an image if it's stored in your repository. i.e.
+
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+* TODO markdown add code snippet                                   :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* HALF [#A] git add alias for repo, and use two different ssh keys :noexport:
+https://gist.github.com/jexchan/2351996
+https://medium.freecodecamp.org/manage-multiple-github-accounts-the-ssh-way-2dadc30ccaca
+
+Host github.com-jexchan
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/id_rsa_jexchan
